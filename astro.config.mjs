@@ -3,20 +3,17 @@ import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 
 /* -------------------------------------------------------------------
-   IMPORTANT — these two lines decide where the site lives online.
+   This site is deployed on Vercel, which serves it from the root of a
+   domain — so `base` stays "/".
 
-   Hosting on GitHub Pages from this repository:
-     site: "https://<your-github-username>.github.io"
-     base: "/<the-repository-name>"
-
-   Hosting on your own domain (or on Netlify / Vercel):
-     site: "https://www.yourchurchdomain.org"
-     base: "/"            <-- change this, or links will 404
+   `site` is only used to build absolute URLs for the canonical link and
+   the social sharing tags. Once the parish has its own domain, put it
+   here (for example "https://www.jesusarenaparish.org") and redeploy.
    ------------------------------------------------------------------- */
 
 export default defineConfig({
-  site: "https://ayomide716.github.io",
-  base: "/jesus-arena-parish",
+  site: "https://jesus-arena-parish.vercel.app",
+  base: "/",
 
   vite: {
     plugins: [tailwindcss()],

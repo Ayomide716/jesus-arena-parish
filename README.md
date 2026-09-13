@@ -94,23 +94,30 @@ show it). `public/favicon.svg` is the small version shown in the browser tab.
 
 ## Putting it online
 
-### GitHub Pages (free)
+The site is deployed on **Vercel**, connected to this repository.
 
-1. In this repository go to **Settings → Pages** and set **Source** to
-   **GitHub Actions**.
-2. Push to the `main` branch. The workflow in
-   `.github/workflows/deploy.yml` builds and publishes the site automatically.
-3. The site appears at `https://<username>.github.io/<repository-name>/`.
+Vercel rebuilds automatically on every push:
 
-If you rename the repository, update `base` in
-[`astro.config.mjs`](astro.config.mjs) to match the new name — otherwise the
-links and images will break.
+- pushing to `main` updates the **live site**;
+- pushing to any other branch gives a **preview link** for that branch, so a
+  change can be checked before it goes live.
 
-### Netlify or Vercel
+[`vercel.json`](vercel.json) pins the build so it does not depend on the
+project's dashboard settings:
 
-Connect the repository, set the build command to `npm run build` and the
-publish directory to `dist`. Then set `base: "/"` in `astro.config.mjs` and put
-your real domain in `site`.
+```json
+{ "framework": "astro", "buildCommand": "npm run build", "outputDirectory": "dist" }
+```
+
+> This repository previously held a Next.js app. If a Vercel build fails, check
+> that the project's **Framework Preset** is *Astro* and not *Next.js* — the
+> `vercel.json` above should already take care of it.
+
+### Using the parish's own domain
+
+Add the domain in Vercel under **Settings → Domains**, then put it in the `site`
+field of [`astro.config.mjs`](astro.config.mjs) so that shared links and search
+engines point at the right address. Leave `base` as `"/"`.
 
 ## The contact form
 
