@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="RCCG Jesus Arena Parish emblem">
+  <title>RCCG Jesus Arena Parish emblem</title>
+  <defs>
+    <clipPath id="globe">
+      <circle cx="100" cy="100" r="72" />
+    </clipPath>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#13398f" />
+      <stop offset="100%" stop-color="#0a2159" />
+    </linearGradient>
+  </defs>
+
+  <!-- The world: blue for agape love -->
+  <circle cx="100" cy="100" r="72" fill="url(#sea)" />
+
+  <!-- Green landmasses: fruitfulness -->
+  <g clip-path="url(#globe)" fill="#1b7a4b">
+    <path d="M34 66c14-10 28-6 40 2 10 7 6 18-4 22-12 5-26 2-36-6-4-3-4-14 0-18Z" />
+    <path d="M78 104c16-8 34-4 44 8 8 10 4 26-8 32-14 7-32 3-42-9-8-9-6-25 6-31Z" />
+    <path d="M128 52c12-4 24 2 28 12 4 11-4 22-16 24-13 2-24-6-25-17-1-9 5-17 13-19Z" />
+    <path d="M30 122c10-4 20 0 24 8 4 9-2 18-12 20-11 2-21-4-22-13-1-7 4-13 10-15Z" />
+  </g>
+
+  <!-- Meridians -->
+  <g clip-path="url(#globe)" fill="none" stroke="#dde6fa" stroke-opacity="0.35" stroke-width="1.5">
+    <ellipse cx="100" cy="100" rx="30" ry="72" />
+    <ellipse cx="100" cy="100" rx="56" ry="72" />
+    <path d="M28 100h144M40 64h120M40 136h120" />
+  </g>
+
+  <circle cx="100" cy="100" r="72" fill="none" stroke="#05143a" stroke-opacity="0.35" stroke-width="2" />
+
+  <!-- The red rings: the blood of Jesus, our covering -->
+  <g fill="none" stroke="#c8102e" stroke-width="6">
+    <ellipse cx="100" cy="100" rx="94" ry="40" transform="rotate(-28 100 100)" />
+    <ellipse cx="100" cy="100" rx="94" ry="40" transform="rotate(28 100 100)" />
+  </g>
+
+  <!-- The white dove: the Holy Spirit -->
+  <g fill="#ffffff">
+    <path d="M84 138c-2-14 3-27 13-37 9-9 21-15 33-17-4 10-6 17-6 24 7-5 15-7 23-6-6 9-14 16-23 21-9 5-19 8-28 9l-4 8c-2 4-6 3-8-2Z" />
+    <path d="M97 101c-9-6-14-16-13-27 1-10 8-19 18-23 1 10 5 19 12 25 6 6 14 9 22 9-5 9-14 15-24 16-5 1-10 0-15-2Z" />
+    <circle cx="130" cy="70" r="3" fill="#0a2159" />
+  </g>
+</svg>

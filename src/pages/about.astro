@@ -1,0 +1,159 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionHead from "../components/SectionHead.astro";
+import { beliefs, church, emblem, pastor, url } from "../data/site";
+
+const emblemDot: Record<string, string> = {
+  blue: "bg-blue-700",
+  red: "bg-scarlet-600",
+  white: "bg-white border border-sand-200",
+  green: "bg-olive-600",
+};
+---
+
+<Base
+  title={`About — ${church.fullName}`}
+  description="Who we are, what we believe, and the convictions that shape the life of RCCG Jesus Arena Parish."
+>
+  <PageHero
+    eyebrow="About our parish"
+    title="One family, called to lift Jesus up"
+    lede="We are a congregation of the Redeemed Christian Church of God — an ordinary family of believers serving an extraordinary God."
+    verse="“That in all things He might have the pre-eminence.” — Colossians 1:18"
+  />
+
+  <section class="px-5 py-20 sm:py-24">
+    <div class="mx-auto grid max-w-6xl gap-14 lg:grid-cols-[1.15fr_0.85fr]">
+      <div>
+        <SectionHead
+          eyebrow="Our story"
+          title="A house built by prayer"
+        />
+        <div class="mt-6 space-y-5 leading-relaxed text-muted">
+          <p>
+            {church.fullName} began the way most RCCG parishes begin — with a
+            handful of believers, a few chairs, and a conviction that God wanted
+            to do something in this community. What has grown from that is a
+            church family drawn from many backgrounds and many seasons of life.
+          </p>
+          <p>
+            Our mission is the mission of the Redeemed Christian Church of God:
+            to make heaven, to take as many people with us as possible, to hold
+            firmly to holiness, and to plant churches within five minutes'
+            walking distance in every city and town.
+          </p>
+          <p>
+            Practically, that means a parish where the Word is taught plainly,
+            where prayer is not an afterthought, where children and young people
+            are taken seriously, and where nobody has to carry their burdens on
+            their own.
+          </p>
+        </div>
+
+        <div class="mt-10 grid gap-5 sm:grid-cols-3">
+          {
+            [
+              { k: "Our mission", v: "To make heaven, and to take as many people with us as we can." },
+              { k: "Our method", v: "Holiness, prayer, the Word, and genuine family." },
+              { k: "Our welcome", v: "Open to everyone, whatever your story so far." },
+            ].map((item) => (
+              <div class="rounded-xl border border-sand-200 bg-white p-6">
+                <p class="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-scarlet-600">
+                  {item.k}
+                </p>
+                <p class="mt-2 text-sm leading-relaxed text-muted">{item.v}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <aside class="card h-fit p-9">
+        <div
+          class="grid h-20 w-20 place-items-center rounded-full bg-blue-900 font-display text-3xl text-white"
+          aria-hidden="true"
+        >
+          ✝
+        </div>
+        <blockquote class="mt-7 font-display text-xl italic leading-snug text-blue-900">
+          “{pastor.quote}”
+        </blockquote>
+        <p class="mt-5 font-semibold text-ink">{pastor.name}</p>
+        <p class="text-sm text-muted">{pastor.role}</p>
+        <a href={url("contact")} class="btn btn-dark mt-8 w-full">
+          Say hello
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Beliefs -->
+  <section class="bg-white px-5 py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl">
+      <SectionHead
+        center
+        eyebrow="What we believe"
+        title="The convictions we build on"
+        lede="These are not slogans. They shape how we worship, how we teach and how we treat one another."
+      />
+
+      <div class="mt-14 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+        {
+          beliefs.map((b, i) => (
+            <article class="card card-hover p-8">
+              <span class="font-display text-3xl text-blue-100">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 class="mt-3 text-xl font-semibold text-blue-900">{b.title}</h3>
+              <p class="mt-3 leading-relaxed text-muted">{b.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Emblem -->
+  <section
+    class="bg-blue-950 px-5 py-20 text-white sm:py-24"
+    style="background-image: radial-gradient(45rem 26rem at 10% 0%, rgba(28,76,184,.45), transparent 60%);"
+  >
+    <div class="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[0.8fr_1.2fr]">
+      <img
+        src={url("logo.svg")}
+        alt="The RCCG emblem"
+        width="320"
+        height="320"
+        class="mx-auto w-56 lg:w-72"
+      />
+      <div>
+        <SectionHead
+          light
+          eyebrow="Our emblem"
+          title="Four colours, four convictions"
+          lede="The emblem of the Redeemed Christian Church of God is not decoration. Each part of it preaches."
+        />
+        <dl class="mt-10 grid gap-6 sm:grid-cols-2">
+          {
+            emblem.map((item) => (
+              <div class="flex gap-4">
+                <span
+                  class:list={[
+                    "mt-2 h-3 w-3 shrink-0 rounded-full",
+                    emblemDot[item.color],
+                  ]}
+                  aria-hidden="true"
+                />
+                <div>
+                  <dt class="font-semibold text-white">{item.label}</dt>
+                  <dd class="text-sm text-blue-100/75">{item.meaning}</dd>
+                </div>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </section>
+</Base>

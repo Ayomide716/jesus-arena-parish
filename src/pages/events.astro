@@ -1,0 +1,91 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionHead from "../components/SectionHead.astro";
+import { church, events, services, url } from "../data/site";
+---
+
+<Base
+  title={`Events — ${church.fullName}`}
+  description="Service times, monthly programmes and special gatherings at RCCG Jesus Arena Parish."
+>
+  <PageHero
+    eyebrow="What's coming up"
+    title="Events and gatherings"
+    lede="Our week, our month and our year at a glance. All are welcome at every gathering — bring a friend."
+    verse="“Not forsaking the assembling of ourselves together.” — Hebrews 10:25"
+  />
+
+  <!-- Weekly rhythm -->
+  <section class="px-5 py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl">
+      <SectionHead
+        eyebrow="Every week"
+        title="Our weekly rhythm"
+        lede="These are the gatherings you can count on, week in and week out."
+      />
+
+      <div class="mt-12 divide-y divide-sand-200 overflow-hidden rounded-2xl border border-sand-200 bg-white">
+        {
+          services.map((s) => (
+            <div class="flex flex-col gap-2 p-7 sm:flex-row sm:items-center sm:gap-8">
+              <p class="w-28 shrink-0 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-scarlet-600">
+                {s.day}
+              </p>
+              <div class="flex-1">
+                <h3 class="font-display text-xl font-semibold text-blue-900">
+                  {s.name}
+                </h3>
+                <p class="mt-1 text-sm leading-relaxed text-muted">{s.note}</p>
+              </div>
+              <p class="shrink-0 font-medium text-ink">{s.time}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Calendar -->
+  <section class="bg-white px-5 py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl">
+      <SectionHead
+        eyebrow="On the calendar"
+        title="Programmes and special services"
+        lede="Monthly and annual gatherings that mark the life of the parish."
+      />
+
+      <div class="mt-12 grid gap-7 md:grid-cols-2">
+        {
+          events.map((e) => (
+            <article class="card card-hover flex gap-6 p-7">
+              <div class="grid h-20 w-20 shrink-0 place-content-center rounded-xl bg-blue-900 text-center text-white">
+                <span class="text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-blue-100/80">
+                  {e.badge.top}
+                </span>
+                <span class="font-display text-2xl leading-tight">
+                  {e.badge.main}
+                </span>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-blue-900">{e.title}</h3>
+                <p class="mt-1 text-sm text-muted">
+                  {e.when} · {e.where}
+                </p>
+                <p class="mt-3 leading-relaxed text-muted">{e.body}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <p class="mt-10 text-sm text-muted">
+        Dates occasionally change. If you are travelling to join us for a
+        special service,
+        <a href={url("contact")} class="font-semibold text-blue-800 underline">
+          check with the parish office
+        </a> first.
+      </p>
+    </div>
+  </section>
+</Base>

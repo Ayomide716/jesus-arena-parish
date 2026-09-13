@@ -1,0 +1,101 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import { church, giving, url } from "../data/site";
+---
+
+<Base
+  title={`Giving — ${church.fullName}`}
+  description="Give your tithes, offerings and seeds to the work of God at RCCG Jesus Arena Parish."
+>
+  <PageHero
+    eyebrow="Give"
+    title="Partner with the work of God"
+    lede="Your tithes, offerings and seeds keep the lights on, support the work of our ministries and carry the gospel into our community."
+    verse="“God loveth a cheerful giver.” — 2 Corinthians 9:7"
+  />
+
+  <section class="px-5 py-20 sm:py-24">
+    <div class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+      <div>
+        <h2 class="text-3xl font-semibold text-blue-900">
+          Why we give
+        </h2>
+        <div class="mt-6 space-y-5 leading-relaxed text-muted">
+          <p>
+            Giving is worship. Long before it is a budget line, it is an act of
+            trust — saying with our hands what we say with our mouths: that
+            everything we have came from God in the first place.
+          </p>
+          <p>
+            Practically, what you give sustains the ministry of this parish: the
+            teaching of the Word, the care of our children and young people,
+            support for members in difficulty, and outreach into the community
+            around us.
+          </p>
+          <p>
+            You can give in person during any service, or by bank transfer using
+            the details beside. If you would like a record of your giving for
+            the year, the parish office will gladly prepare one for you.
+          </p>
+        </div>
+
+        <div class="mt-10 grid gap-5 sm:grid-cols-3">
+          {
+            [
+              { k: "Tithe", v: "The first tenth, returned to God in worship." },
+              { k: "Offering", v: "A free gift, given as you purpose in your heart." },
+              { k: "Projects", v: "Towards the building and the parish's current needs." },
+            ].map((item) => (
+              <div class="rounded-xl border border-sand-200 bg-white p-6">
+                <p class="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-scarlet-600">
+                  {item.k}
+                </p>
+                <p class="mt-2 text-sm leading-relaxed text-muted">{item.v}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <aside class="card h-fit p-9">
+        <h2 class="text-2xl font-semibold text-blue-900">Bank transfer</h2>
+        <p class="mt-2 text-sm text-muted">
+          The quickest way to give from anywhere.
+        </p>
+
+        <dl class="mt-8 space-y-5">
+          {
+            [
+              ["Account name", giving.accountName],
+              ["Bank", giving.bank],
+              ["Account number", giving.accountNumber],
+              ["Reference", giving.reference],
+            ].map(([k, v]) => (
+              <div class="border-b border-sand-200 pb-4 last:border-0">
+                <dt class="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-muted">
+                  {k}
+                </dt>
+                <dd class="mt-1 font-semibold text-blue-900">{v}</dd>
+              </div>
+            ))
+          }
+        </dl>
+
+        <p class="mt-6 text-sm leading-relaxed text-muted">
+          Please use the reference so our finance team can record your gift
+          correctly. Questions about giving? The parish office is happy to help.
+        </p>
+        <a href={url("contact")} class="btn btn-dark mt-7 w-full">
+          Contact the office
+        </a>
+      </aside>
+    </div>
+
+    <p class="mx-auto mt-14 max-w-2xl text-center font-display text-xl italic text-blue-900">
+      “Bring ye all the tithes into the storehouse … and prove me now herewith,
+      saith the Lord of hosts, if I will not open you the windows of heaven.”
+      <span class="mt-2 block text-base not-italic text-muted">Malachi 3:10</span>
+    </p>
+  </section>
+</Base>

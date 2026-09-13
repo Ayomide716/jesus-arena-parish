@@ -1,0 +1,207 @@
+@import "tailwindcss";
+
+/* =============================================================
+   Design tokens.
+   The palette is taken from the RCCG emblem: blue for agape love,
+   red for the blood of Jesus, white for holiness and the dove,
+   green for fruitfulness.
+   Change a value here and it changes everywhere on the site.
+   ============================================================= */
+
+@theme {
+  --color-ink: #101725;
+  --color-muted: #5a6478;
+
+  --color-blue-950: #05143a;
+  --color-blue-900: #0a2159;
+  --color-blue-800: #0d2c72;
+  --color-blue-700: #13398f;
+  --color-blue-600: #1c4cb8;
+  --color-blue-100: #dde6fa;
+  --color-blue-50: #eef3fd;
+
+  --color-scarlet-700: #97081f;
+  --color-scarlet-600: #c8102e;
+  --color-scarlet-500: #e0203f;
+  --color-scarlet-100: #fbe2e6;
+
+  --color-olive-700: #12603a;
+  --color-olive-600: #1b7a4b;
+  --color-olive-100: #dff1e7;
+
+  --color-sand-50: #faf8f4;
+  --color-sand-100: #f3efe7;
+  --color-sand-200: #e6ded0;
+
+  --font-display: "Playfair Display Variable", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --shadow-lift: 0 24px 60px -24px rgb(5 20 58 / 0.35);
+  --shadow-card: 0 2px 4px rgb(5 20 58 / 0.04), 0 12px 32px -16px rgb(5 20 58 / 0.18);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-sand-50);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-blue-800);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-scarlet-600);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* Section label above a heading */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-scarlet-600);
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 2rem;
+    height: 2px;
+    background: currentColor;
+    opacity: 0.6;
+  }
+
+  .eyebrow--center::after {
+    content: "";
+    width: 2rem;
+    height: 2px;
+    background: currentColor;
+    opacity: 0.6;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    padding: 0.85rem 1.75rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1;
+    border: 1.5px solid transparent;
+    transition: transform 0.18s ease, background-color 0.18s ease,
+      color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-primary {
+    background: var(--color-scarlet-600);
+    border-color: var(--color-scarlet-600);
+    color: #fff;
+    box-shadow: 0 10px 24px -12px rgb(200 16 46 / 0.8);
+  }
+
+  .btn-primary:hover {
+    background: var(--color-scarlet-500);
+    border-color: var(--color-scarlet-500);
+  }
+
+  .btn-light {
+    background: transparent;
+    border-color: rgb(255 255 255 / 0.45);
+    color: #fff;
+  }
+
+  .btn-light:hover {
+    background: rgb(255 255 255 / 0.12);
+    border-color: rgb(255 255 255 / 0.8);
+  }
+
+  .btn-dark {
+    background: transparent;
+    border-color: var(--color-blue-800);
+    color: var(--color-blue-800);
+  }
+
+  .btn-dark:hover {
+    background: var(--color-blue-800);
+    color: #fff;
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid var(--color-sand-200);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.2s ease, box-shadow 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-blue-100);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .rule {
+    height: 3px;
+    width: 3rem;
+    border-radius: 999px;
+    background: linear-gradient(
+      90deg,
+      var(--color-scarlet-600),
+      var(--color-scarlet-600) 55%,
+      var(--color-blue-600)
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

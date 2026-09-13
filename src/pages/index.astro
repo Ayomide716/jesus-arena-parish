@@ -1,0 +1,318 @@
+---
+import Base from "../layouts/Base.astro";
+import SectionHead from "../components/SectionHead.astro";
+import {
+  church,
+  emblem,
+  events,
+  ministries,
+  sermons,
+  services,
+  url,
+} from "../data/site";
+
+const emblemDot: Record<string, string> = {
+  blue: "bg-blue-700",
+  red: "bg-scarlet-600",
+  white: "bg-white border border-sand-200",
+  green: "bg-olive-600",
+};
+---
+
+<Base>
+  <!-- ===================== HERO ===================== -->
+  <section
+    class="relative overflow-hidden bg-blue-950 text-white"
+    style="background-image: radial-gradient(55rem 34rem at 78% 8%, rgba(28,76,184,.6), transparent 62%), radial-gradient(38rem 26rem at 0% 100%, rgba(27,122,75,.32), transparent 60%);"
+  >
+    <img
+      src={url("logo.svg")}
+      alt=""
+      aria-hidden="true"
+      class="pointer-events-none absolute -right-16 top-1/2 hidden w-[30rem] -translate-y-1/2 opacity-[0.13] lg:block"
+    />
+
+    <div class="relative mx-auto max-w-6xl px-5 py-20 sm:py-28">
+      <p class="eyebrow !text-scarlet-500">{church.denomination}</p>
+
+      <h1 class="mt-5 max-w-3xl text-4xl font-semibold sm:text-6xl">
+        A place to belong, to grow and to serve
+      </h1>
+
+      <p class="mt-6 max-w-xl text-lg text-blue-100/85">
+        Welcome to {church.fullName}. Whether you are visiting for the first
+        time or looking for a church home, there is a seat here for you and
+        your family.
+      </p>
+
+      <p
+        class="mt-8 max-w-md border-l-2 border-scarlet-600 pl-4 font-display text-lg italic text-blue-100/90"
+      >
+        “I was glad when they said unto me, let us go into the house of the
+        Lord.” — Psalm 122:1
+      </p>
+
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a href={url("contact")} class="btn btn-primary">Plan your visit</a>
+        <a href={url("sermons")} class="btn btn-light">Watch a message</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SERVICE TIMES ===================== -->
+  <section class="relative z-10 -mt-10 px-5 sm:-mt-14" aria-label="Service times">
+    <div
+      class="mx-auto grid max-w-6xl gap-px overflow-hidden rounded-2xl bg-sand-200 shadow-[var(--shadow-lift)] sm:grid-cols-2 lg:grid-cols-4"
+    >
+      {
+        services.map((s) => (
+          <div class="bg-white p-7">
+            <p class="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-scarlet-600">
+              {s.day}
+            </p>
+            <h2 class="mt-2 font-display text-xl font-semibold text-blue-900">
+              {s.name}
+            </h2>
+            <p class="mt-1 text-sm font-medium text-ink">{s.time}</p>
+            <p class="mt-3 text-sm leading-relaxed text-muted">{s.note}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- ===================== FIRST VISIT ===================== -->
+  <section class="px-5 py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl">
+      <SectionHead
+        center
+        eyebrow="You are welcome here"
+        title="What to expect on your first visit"
+        lede="Come as you are. Our services are warm, Bible-centred and full of joyful worship — and if you let us know you are coming, someone will be waiting to meet you at the door."
+      />
+
+      <div class="mt-14 grid gap-7 md:grid-cols-3">
+        {
+          [
+            {
+              title: "Easy to find us",
+              body: "Parking is free and our ushers will show you where to go. Look for the welcome desk just inside the main entrance.",
+              path: "M12 21s-7-4.6-7-10a7 7 0 0 1 14 0c0 5.4-7 10-7 10Z M12 11m-2.5 0a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0-5 0",
+            },
+            {
+              title: "Rooted in the Word",
+              body: "Every service centres on Scripture and on practical teaching you can carry into your week, your work and your home.",
+              path: "M4 19.5V6a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 1.5Z M9 8h6 M9 12h6",
+            },
+            {
+              title: "Room for the children",
+              body: "Children's church and the teens' class run alongside the main service, so your little ones are cared for and taught at their own level.",
+              path: "M9 8m-3.2 0a3.2 3.2 0 1 0 6.4 0a3.2 3.2 0 1 0-6.4 0 M2.5 20a6.5 6.5 0 0 1 13 0 M16 5.2a3.2 3.2 0 0 1 0 5.6 M18 20a6.6 6.6 0 0 0-2.3-5",
+            },
+          ].map((item) => (
+            <article class="card card-hover p-8">
+              <div class="grid h-12 w-12 place-items-center rounded-xl bg-blue-50 text-blue-800">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d={item.path} />
+                </svg>
+              </div>
+              <h3 class="mt-6 text-xl font-semibold text-blue-900">
+                {item.title}
+              </h3>
+              <p class="mt-3 leading-relaxed text-muted">{item.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ABOUT + EMBLEM ===================== -->
+  <section class="bg-white px-5 py-20 sm:py-24">
+    <div class="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-2">
+      <div>
+        <SectionHead
+          eyebrow="About our parish"
+          title="One family, called to lift Jesus up"
+          lede="We are part of the Redeemed Christian Church of God, a worldwide family of churches. We exist to make heaven, to take as many people with us as possible, and to hold firmly to holiness, prayer and the teaching of God's Word."
+        />
+        <p class="mt-5 leading-relaxed text-muted">
+          From our first gathering to today, the heart of this parish has stayed
+          the same: a place where strangers become family, where the hurting
+          find hope, and where every believer is equipped to serve.
+        </p>
+        <a href={url("about")} class="btn btn-dark mt-8">Read our story</a>
+      </div>
+
+      <div class="card p-9">
+        <img
+          src={url("logo.svg")}
+          alt="The RCCG emblem"
+          width="128"
+          height="128"
+          class="h-28 w-28"
+        />
+        <h3 class="mt-6 text-2xl font-semibold text-blue-900">
+          What our emblem means
+        </h3>
+        <p class="mt-2 text-sm text-muted">
+          Every colour in the RCCG emblem carries a conviction we hold dear.
+        </p>
+        <dl class="mt-7 space-y-4">
+          {
+            emblem.map((item) => (
+              <div class="flex gap-4">
+                <span
+                  class:list={[
+                    "mt-2 h-3 w-3 shrink-0 rounded-full",
+                    emblemDot[item.color],
+                  ]}
+                  aria-hidden="true"
+                />
+                <div>
+                  <dt class="font-semibold text-blue-900">{item.label}</dt>
+                  <dd class="text-sm text-muted">{item.meaning}</dd>
+                </div>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MINISTRIES ===================== -->
+  <section class="px-5 py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <SectionHead
+          eyebrow="Get involved"
+          title="There is a place here for you"
+          lede="Whatever your season or your gift, you will find people to grow with and work to put your hand to."
+        />
+        <a href={url("ministries")} class="btn btn-dark">All ministries</a>
+      </div>
+
+      <div class="mt-14 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+        {
+          ministries.slice(0, 6).map((m) => (
+            <article class="card card-hover p-8">
+              <span class="rule block" aria-hidden="true" />
+              <h3 class="mt-5 text-xl font-semibold text-blue-900">{m.name}</h3>
+              <p class="mt-3 leading-relaxed text-muted">{m.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SERMONS ===================== -->
+  <section
+    class="bg-blue-950 px-5 py-20 text-white sm:py-24"
+    style="background-image: radial-gradient(45rem 26rem at 95% 0%, rgba(28,76,184,.45), transparent 60%);"
+  >
+    <div class="mx-auto max-w-6xl">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <SectionHead
+          light
+          eyebrow="Listen again"
+          title="Recent messages"
+          lede="Missed a Sunday? Catch up here, or subscribe to our channel to be notified when a new message goes up."
+        />
+        <a href={url("sermons")} class="btn btn-light">All sermons</a>
+      </div>
+
+      <div class="mt-14 grid gap-7 md:grid-cols-3">
+        {
+          sermons.slice(0, 3).map((s) => (
+            <article class="rounded-2xl border border-white/10 bg-white/[0.04] p-8 transition hover:border-scarlet-600/60 hover:bg-white/[0.07]">
+              <p class="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-scarlet-500">
+                {s.series}
+              </p>
+              <h3 class="mt-3 text-xl font-semibold text-white">{s.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-blue-100/75">
+                {s.body}
+              </p>
+              <a
+                href={s.href}
+                class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-scarlet-500"
+              >
+                Listen
+                <span aria-hidden="true">→</span>
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EVENTS ===================== -->
+  <section class="bg-white px-5 py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <SectionHead
+          eyebrow="What's coming up"
+          title="Upcoming events"
+          lede="Mark your calendar and invite a friend. All are welcome at every gathering."
+        />
+        <a href={url("events")} class="btn btn-dark">Full calendar</a>
+      </div>
+
+      <div class="mt-14 grid gap-7 md:grid-cols-2">
+        {
+          events.slice(0, 4).map((e) => (
+            <article class="card card-hover flex gap-6 p-7">
+              <div class="grid h-20 w-20 shrink-0 place-content-center rounded-xl bg-blue-900 text-center text-white">
+                <span class="text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-blue-100/80">
+                  {e.badge.top}
+                </span>
+                <span class="font-display text-2xl leading-tight">
+                  {e.badge.main}
+                </span>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-blue-900">{e.title}</h3>
+                <p class="mt-1 text-sm text-muted">
+                  {e.when} · {e.where}
+                </p>
+                <p class="mt-3 leading-relaxed text-muted">{e.body}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CLOSING CALL ===================== -->
+  <section class="px-5 py-20 sm:py-24">
+    <div
+      class="mx-auto max-w-6xl overflow-hidden rounded-3xl bg-blue-900 px-8 py-16 text-center text-white sm:px-16"
+      style="background-image: radial-gradient(40rem 20rem at 50% 0%, rgba(28,76,184,.55), transparent 65%);"
+    >
+      <h2 class="mx-auto max-w-2xl text-3xl font-semibold sm:text-4xl">
+        We would love to meet you this Sunday
+      </h2>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-blue-100/85">
+        Tell us you are coming and we will look out for you — or send a prayer
+        request and our team will stand with you in prayer.
+      </p>
+      <div class="mt-9 flex flex-wrap justify-center gap-4">
+        <a href={url("contact")} class="btn btn-primary">Get in touch</a>
+        <a href={url("giving")} class="btn btn-light">Give to the work</a>
+      </div>
+    </div>
+  </section>
+</Base>
