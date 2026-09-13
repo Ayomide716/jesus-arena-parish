@@ -41,26 +41,15 @@ const isActive = (href: string) => (href.replace(/\/+$/, "") || "/") === path;
       aria-expanded="false"
       aria-controls="site-nav"
       aria-label="Open menu"
-      class="grid h-11 w-11 place-items-center rounded-sm border-2 border-white/30 md:hidden"
+      class="burger grid h-11 w-11 shrink-0 place-items-center rounded-sm border-2 border-white/30 md:hidden"
     >
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.2"
-        stroke-linecap="round"
-        aria-hidden="true"
-      >
-        <path d="M4 7h16M4 12h16M4 17h16"></path>
-      </svg>
+      <span class="burger-bars" aria-hidden="true"></span>
     </button>
 
     <nav
       id="site-nav"
       aria-label="Primary"
-      class="absolute inset-x-0 top-full hidden flex-col bg-indigo-900 px-5 pb-6 md:static md:flex md:flex-row md:items-center md:gap-6 md:bg-transparent md:p-0"
+      class="nav-panel absolute inset-x-0 top-full hidden flex-col border-t border-white/10 bg-indigo-900 px-5 pb-6 pt-2 shadow-2xl md:static md:flex md:flex-row md:items-center md:gap-6 md:border-0 md:bg-transparent md:p-0 md:shadow-none"
     >
       {
         nav.map((item) => (
@@ -68,10 +57,13 @@ const isActive = (href: string) => (href.replace(/\/+$/, "") || "/") === path;
             href={item.href}
             aria-current={isActive(item.href) ? "page" : undefined}
             class:list={[
-              "font-display text-[0.95rem] md:text-[0.9rem]",
-              "border-b border-white/10 py-3.5 md:border-0 md:py-0",
+              "font-display",
+              /* Mobile: full-width rows with a comfortable tap target */
+              "flex min-h-[52px] items-center border-b border-white/10 text-[1.05rem]",
+              /* Desktop: a plain inline row */
+              "md:min-h-0 md:border-0 md:text-[0.9rem]",
               isActive(item.href)
-                ? "text-white md:border-b-2 md:border-red md:pb-1"
+                ? "border-l-[3px] border-l-red pl-3 text-white md:border-l-0 md:border-b-2 md:border-b-red md:pb-1 md:pl-0"
                 : "text-indigo-200 hover:text-white",
             ]}
             style="font-variation-settings: 'wdth' 106, 'wght' 550;"
@@ -80,7 +72,10 @@ const isActive = (href: string) => (href.replace(/\/+$/, "") || "/") === path;
           </a>
         ))
       }
-      <a href={url("giving")} class="btn btn-red mt-5 text-center md:mt-0">
+      <a
+        href={url("giving")}
+        class="btn btn-red mt-5 block text-center md:mt-0 md:inline-block"
+      >
         Give
       </a>
     </nav>
@@ -95,18 +90,42 @@ const isActive = (href: string) => (href.replace(/\/+$/, "") || "/") === path;
   const toggle = document.getElementById("nav-toggle");
   const menu = document.getElementById("site-nav");
 
-  toggle?.addEventListener("click", () => {
-    const open = menu?.classList.toggle("hidden") === false;
+  /* The panel is display:none when closed, so it must become a flex
+     column when opened — removing `hidden` alone would leave it as a
+     block and the links would run together in a row. */
+  function setOpen(open: boolean) {
+    if (!menu || !toggle) return;
+    menu.classList.toggle("hidden", !open);
+    menu.classList.toggle("flex", open);
+    toggle.classList.toggle("is-open", open);
     toggle.setAttribute("aria-expanded", String(open));
     toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-  });
+  }
+
+  const isOpen = () => toggle?.getAttribute("aria-expanded") === "true";
+
+  toggle?.addEventListener("click", () => setOpen(!isOpen()));
 
   menu?.addEventListener("click", (event) => {
     const target = event.target as HTMLElement;
-    if (target.tagName === "A" && window.innerWidth < 768) {
-      menu.classList.add("hidden");
-      toggle?.setAttribute("aria-expanded", "false");
-      toggle?.setAttribute("aria-label", "Open menu");
+    if (target.closest("a") && window.innerWidth < 768) setOpen(false);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && isOpen()) {
+      setOpen(false);
+      toggle?.focus();
     }
+  });
+
+  document.addEventListener("click", (event) => {
+    const target = event.target as HTMLElement;
+    if (!isOpen()) return;
+    if (!menu?.contains(target) && !toggle?.contains(target)) setOpen(false);
+  });
+
+  /* Leaving the phone layout resets the panel to its desktop state. */
+  window.matchMedia("(min-width: 768px)").addEventListener("change", (e) => {
+    if (e.matches) setOpen(false);
   });
 </script>
