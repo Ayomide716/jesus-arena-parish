@@ -84,6 +84,13 @@ const isActive = (href: string) => (href.replace(/\/+$/, "") || "/") === path;
   <!-- The emblem's rings, as the edge of the masthead -->
   <div class="h-[3px] bg-red"></div>
   <div class="h-[2px] bg-green"></div>
+
+  <!-- Lifts the masthead off the page once you have scrolled. -->
+  <div
+    class="header-shadow pointer-events-none absolute inset-x-0 top-full h-6 bg-gradient-to-b from-indigo-900/30 to-transparent opacity-0"
+    aria-hidden="true"
+  >
+  </div>
 </header>
 
 <script>

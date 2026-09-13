@@ -51,3 +51,25 @@ bundled scripts for network calls, subprocess use or file writes.
 ## Removing one
 
 Delete its folder and commit. Nothing else references them.
+
+## Motion on this site
+
+All of it is CSS. The scroll-linked motion uses native CSS scroll timelines
+(`animation-timeline: scroll()` and `view()`), so there is still no JavaScript
+and no animation library in the build.
+
+Two things to know before editing it:
+
+1. **Never use the `animation` shorthand for scroll-driven rules.** The CSS
+   minifier merges the shorthand with `animation-timeline`, and per spec the
+   shorthand *resets* the timeline — so the animation silently stops being
+   scroll-linked and runs once on load instead. Use the longhand properties
+   (`animation-name`, `animation-duration`, …) as the existing rules do.
+2. **Keep the `@supports (animation-timeline: scroll())` guard.** Without it,
+   browsers that lack scroll timelines (Firefox at the time of writing) would
+   run those keyframes once on a time timeline, and the seal would drift off
+   on its own.
+
+Scroll-linked rules never animate `opacity` down from 1, so no content can be
+left invisible if a timeline misbehaves. Everything is wrapped in
+`prefers-reduced-motion: no-preference` as well as the global reduce rule.

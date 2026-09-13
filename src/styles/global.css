@@ -115,6 +115,7 @@
 
   .link {
     color: var(--color-green-dark);
+    transition: color 0.16s cubic-bezier(0.3, 0.7, 0.4, 1);
     text-decoration: underline;
     text-decoration-thickness: 1.5px;
     text-underline-offset: 3px;
@@ -148,8 +149,16 @@
     padding: 1rem 1.6rem;
     border: 2px solid transparent;
     border-radius: 3px;
-    transition: background-color 0.15s ease, color 0.15s ease,
-      border-color 0.15s ease;
+    transition: background-color 0.16s cubic-bezier(0.3, 0.7, 0.4, 1),
+      color 0.16s cubic-bezier(0.3, 0.7, 0.4, 1),
+      border-color 0.16s cubic-bezier(0.3, 0.7, 0.4, 1),
+      transform 0.12s cubic-bezier(0.3, 0.7, 0.4, 1);
+  }
+
+  /* Tactile feedback on press. Instant rather than animated: a button
+     is pressed often, and motion there would become friction. */
+  .btn:active {
+    transform: scale(0.97);
   }
 
   .btn-red {
@@ -337,44 +346,139 @@
     .nav-panel:not(.hidden) > *:nth-child(7) { animation-delay: 0.21s; }
   }
 
-  /* ---- One orchestrated entrance, on the hero only --------------- */
+  /* ---- The hero's one orchestrated entrance ----------------------
+     Opacity + translate + blur, so elements come into focus rather
+     than merely fading. Larger elements take longer: the seal is the
+     biggest thing on the page, the lines of text are not. */
 
   @keyframes seal-in {
     from {
       opacity: 0;
-      transform: scale(0.94) rotate(-6deg);
+      transform: scale(0.92) rotate(-8deg);
+      filter: blur(8px);
     }
     to {
       opacity: 1;
       transform: scale(1) rotate(0deg);
+      filter: blur(0);
     }
   }
 
   @keyframes lift-in {
     from {
       opacity: 0;
-      transform: translateY(0.75rem);
+      transform: translateY(0.7rem);
+      filter: blur(4px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
+      filter: blur(0);
     }
   }
 
   .hero-seal {
-    animation: seal-in 1s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+    animation: seal-in 0.9s cubic-bezier(0.16, 0.84, 0.32, 1) both;
   }
 
   .hero-line {
-    animation: lift-in 0.7s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+    animation: lift-in 0.55s cubic-bezier(0.16, 0.84, 0.32, 1) both;
   }
 
   .hero-line-2 {
-    animation-delay: 0.12s;
+    animation-delay: 0.1s;
   }
+
   .hero-line-3 {
-    animation-delay: 0.24s;
+    animation-delay: 0.2s;
   }
+
+  /* ---- Scroll-driven motion --------------------------------------
+     Native CSS scroll timelines. No JavaScript and no library, so the
+     site still ships zero JS.
+
+     The @supports guard is load-bearing: in a browser without scroll
+     timelines these keyframes would otherwise run once on a time
+     timeline and drift on their own. Guarded, those browsers simply
+     get no parallax, which is the right thing to lose. */
+
+  @supports (animation-timeline: scroll()) {
+    @media (prefers-reduced-motion: no-preference) {
+      /* The seal is a medallion, so it turns as it rises. Short travel
+         and a slow turn: parallax is a vestibular trigger even when it
+         is asked for. */
+      @keyframes seal-drift {
+        to {
+          transform: translateY(-3rem) rotate(10deg);
+        }
+      }
+
+      @keyframes seal-drift-crest {
+        to {
+          transform: translateY(-0.9rem) rotate(6deg);
+        }
+      }
+
+      /* Longhands only, and never the `animation` shorthand: the CSS
+         minifier merges the shorthand with animation-timeline, and the
+         shorthand resets the timeline, which silently kills the effect. */
+      .seal-parallax {
+        animation-name: seal-drift;
+        animation-duration: 1ms;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+        animation-timeline: scroll(root block);
+        animation-range: 0 100vh;
+        will-change: transform;
+      }
+
+      .seal-parallax--crest {
+        animation-name: seal-drift-crest;
+        width: fit-content;
+      }
+
+      /* The emblem section settles into place as it is scrolled to —
+         one deliberate reveal, not a fade-up on every section. Scale
+         and rotation only: opacity is never animated here, so the
+         emblem can never be left invisible. */
+      @keyframes seal-settle {
+        from {
+          transform: scale(0.94) rotate(-10deg);
+        }
+        to {
+          transform: scale(1) rotate(0deg);
+        }
+      }
+
+      .seal-reveal {
+        animation-name: seal-settle;
+        animation-duration: 1ms;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+        animation-timeline: view();
+        animation-range: entry 15% cover 45%;
+      }
+
+      /* The header lifts off the page once you have scrolled past the
+         hero — it says "you have moved", which is orientation, not
+         decoration. */
+      @keyframes header-lift {
+        to {
+          opacity: 1;
+        }
+      }
+
+      .header-shadow {
+        animation-name: header-lift;
+        animation-duration: 1ms;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+        animation-timeline: scroll(root block);
+        animation-range: 0 140px;
+      }
+    }
+  }
+
 }
 
 @media (prefers-reduced-motion: reduce) {

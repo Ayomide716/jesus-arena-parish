@@ -12,25 +12,32 @@ const midweek = services.filter((s) => s.day !== "Sunday");
     {/* The emblem is the one bold thing on this page. On a wide screen it
         runs off the edge at full scale; on a phone it sits above the
         headline as a crest, so it never competes with the words. */}
-    <img
-      src={url("rccg-emblem.png")}
-      alt=""
+    <div
+      class="pointer-events-none absolute right-[-4rem] top-1/2 hidden w-[42rem] -translate-y-1/2 xl:block"
       aria-hidden="true"
-      width="900"
-      height="900"
-      class="hero-seal pointer-events-none absolute right-[-4rem] top-1/2 hidden w-[42rem] -translate-y-1/2 xl:block"
-    />
+    >
+      <div class="seal-parallax">
+        <img
+          src={url("rccg-emblem.png")}
+          alt=""
+          width="900"
+          height="900"
+          class="hero-seal w-full"
+        />
+      </div>
+    </div>
 
     <div class="relative mx-auto max-w-6xl px-5 py-16 sm:py-20 lg:py-32">
       <div class="xl:max-w-[36rem]">
-        <img
-          src={url("rccg-emblem-sm.png")}
-          alt=""
-          aria-hidden="true"
-          width="160"
-          height="160"
-          class="hero-seal mb-8 h-24 w-24 sm:h-28 sm:w-28 xl:hidden"
-        />
+        <div class="seal-parallax seal-parallax--crest mb-8 xl:hidden" aria-hidden="true">
+          <img
+            src={url("rccg-emblem-sm.png")}
+            alt=""
+            width="160"
+            height="160"
+            class="hero-seal h-24 w-24 sm:h-28 sm:w-28"
+          />
+        </div>
 
         <h1
           class="hero-line max-w-[15ch] text-[2.5rem] sm:text-[3.3rem] lg:text-[3.8rem]"
@@ -142,7 +149,7 @@ const midweek = services.filter((s) => s.day !== "Sunday");
         alt="The emblem of the Redeemed Christian Church of God"
         width="900"
         height="900"
-        class="mx-auto w-52 lg:mx-0 lg:w-full"
+        class="seal-reveal mx-auto w-52 lg:mx-0 lg:w-full"
       />
 
       <div>
