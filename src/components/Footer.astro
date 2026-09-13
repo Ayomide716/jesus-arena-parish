@@ -101,8 +101,15 @@ const icons: Record<string, string> = {
       </div>
     </div>
 
-    <p class="mt-12 border-t border-white/10 pt-6 text-xs">
-      &copy; {year} {church.fullName}. To God be the glory.
-    </p>
+    <div
+      class="mt-12 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs"
+    >
+      <p>&copy; {year} {church.fullName}. To God be the glory.</p>
+      {/* TEMPORARY: a way into the design preview while it is being
+          decided on. Delete this link once the medallion is settled. */}
+      <a href={url("lab/medallion")} class="text-indigo-200/60 hover:text-white">
+        Design preview
+      </a>
+    </div>
   </div>
 </footer>
