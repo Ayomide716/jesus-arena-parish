@@ -1,33 +1,18 @@
 ---
 interface Props {
-  eyebrow: string;
   title: string;
   lede?: string;
-  center?: boolean;
   light?: boolean;
 }
 
-const { eyebrow, title, lede, center = false, light = false } = Astro.props;
+const { title, lede, light = false } = Astro.props;
 ---
 
-<div class:list={["max-w-2xl", center && "mx-auto text-center"]}>
-  <p class:list={["eyebrow", center && "eyebrow--center"]}>{eyebrow}</p>
-  <h2
-    class:list={[
-      "mt-4 text-3xl font-semibold sm:text-4xl",
-      light ? "text-white" : "text-blue-900",
-    ]}
-  >
-    {title}
-  </h2>
+<div>
+  <h2 class="text-2xl sm:text-3xl">{title}</h2>
   {
     lede && (
-      <p
-        class:list={[
-          "mt-4 text-lg",
-          light ? "text-blue-100/80" : "text-muted",
-        ]}
-      >
+      <p class:list={["measure mt-4", light ? "text-indigo-200" : "text-ink-soft"]}>
         {lede}
       </p>
     )

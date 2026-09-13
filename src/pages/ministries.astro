@@ -9,38 +9,32 @@ import { church, ministries, url } from "../data/site";
   description="Children's church, youth, choir, fellowships, outreach and more — find your place to serve at RCCG Jesus Arena Parish."
 >
   <PageHero
-    eyebrow="Get involved"
-    title="Ministries and fellowships"
+    title="Where people serve"
     lede="There is a place for everyone to grow and to serve. Speak to any usher on Sunday, or send us a message, and we will connect you."
     verse="“As every man hath received the gift, even so minister the same one to another.” — 1 Peter 4:10"
   />
 
-  <section class="px-5 py-20 sm:py-24">
+  <section class="px-5 py-16 sm:py-20">
     <div class="mx-auto max-w-6xl">
-      <div class="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+      <div class="border-b border-hairline">
         {
           ministries.map((m) => (
-            <article class="card card-hover p-8">
-              <span class="rule block" aria-hidden="true" />
-              <h2 class="mt-5 text-xl font-semibold text-blue-900">{m.name}</h2>
-              <p class="mt-3 leading-relaxed text-muted">{m.body}</p>
-            </article>
+            <div class="index-row grid gap-1 px-2 py-6 sm:grid-cols-[18rem_1fr] sm:gap-10">
+              <h2 class="text-lg">{m.name}</h2>
+              <p class="measure text-ink-soft">{m.body}</p>
+            </div>
           ))
         }
       </div>
 
-      <div
-        class="mt-16 overflow-hidden rounded-3xl bg-blue-900 px-8 py-14 text-center text-white sm:px-16"
-        style="background-image: radial-gradient(40rem 20rem at 50% 0%, rgba(28,76,184,.55), transparent 65%);"
-      >
-        <h2 class="mx-auto max-w-2xl text-3xl font-semibold">
-          Not sure where you fit?
-        </h2>
-        <p class="mx-auto mt-4 max-w-xl text-blue-100/85">
-          That is perfectly normal. Tell us a little about yourself and what you
-          enjoy, and we will help you find a unit where your gift is needed.
+      <div class="mt-14 border-t-4 border-green bg-white p-8 sm:p-12">
+        <h2 class="text-2xl">Not sure where you fit?</h2>
+        <p class="measure mt-4 text-ink-soft">
+          That is perfectly normal, and it is not a test. Tell us a little about
+          yourself and what you enjoy, and we will point you at a unit where your
+          gift is actually needed.
         </p>
-        <a href={url("contact")} class="btn btn-primary mt-8">Talk to us</a>
+        <a href={url("contact")} class="btn btn-green mt-7">Talk to us</a>
       </div>
     </div>
   </section>

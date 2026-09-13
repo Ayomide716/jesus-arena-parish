@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Jesus Arena Parish">
-  <rect width="64" height="64" rx="14" fill="#0d2c72" />
-  <ellipse cx="32" cy="32" rx="29" ry="13" fill="none" stroke="#c8102e" stroke-width="4" transform="rotate(-28 32 32)" />
-  <g fill="#ffffff" transform="translate(32 32) scale(0.30) translate(-100 -100)">
-    <path d="M84 138c-2-14 3-27 13-37 9-9 21-15 33-17-4 10-6 17-6 24 7-5 15-7 23-6-6 9-14 16-23 21-9 5-19 8-28 9l-4 8c-2 4-6 3-8-2Z" />
-    <path d="M97 101c-9-6-14-16-13-27 1-10 8-19 18-23 1 10 5 19 12 25 6 6 14 9 22 9-5 9-14 15-24 16-5 1-10 0-15-2Z" />
-  </g>
-</svg>

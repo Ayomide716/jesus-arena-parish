@@ -1,195 +1,287 @@
 @import "tailwindcss";
 
 /* =============================================================
-   Design tokens.
-   The palette is taken from the RCCG emblem: blue for agape love,
-   red for the blood of Jesus, white for holiness and the dove,
-   green for fruitfulness.
-   Change a value here and it changes everywhere on the site.
+   RCCG Jesus Arena Parish
+
+   The palette is sampled directly from the parish emblem:
+   the indigo disc, the green wordmark, the red rings, the
+   white dove. Change a value here and it changes everywhere.
    ============================================================= */
 
 @theme {
-  --color-ink: #101725;
-  --color-muted: #5a6478;
+  /* --- Sampled from the emblem --- */
+  --color-indigo-900: #180b45;
+  --color-indigo-800: #1f1059;
+  --color-indigo: #28166f; /* the disc */
+  --color-indigo-600: #3a2196;
+  --color-indigo-200: #cec7e8;
+  --color-indigo-100: #e6e2f4;
 
-  --color-blue-950: #05143a;
-  --color-blue-900: #0a2159;
-  --color-blue-800: #0d2c72;
-  --color-blue-700: #13398f;
-  --color-blue-600: #1c4cb8;
-  --color-blue-100: #dde6fa;
-  --color-blue-50: #eef3fd;
+  --color-green-dark: #00722f;
+  --color-green: #00923f; /* the wordmark */
+  --color-green-100: #d9f0e2;
 
-  --color-scarlet-700: #97081f;
-  --color-scarlet-600: #c8102e;
-  --color-scarlet-500: #e0203f;
-  --color-scarlet-100: #fbe2e6;
+  --color-red-dark: #b01a14;
+  --color-red: #da251d; /* the rings */
+  --color-red-100: #fbe0de;
 
-  --color-olive-700: #12603a;
-  --color-olive-600: #1b7a4b;
-  --color-olive-100: #dff1e7;
+  /* --- Surfaces and text --- */
+  --color-paper: #f6f5fa; /* white, tinted by the indigo */
+  --color-ink: #191333;
+  --color-ink-soft: #5a5477;
+  --color-hairline: #ddd8ec;
 
-  --color-sand-50: #faf8f4;
-  --color-sand-100: #f3efe7;
-  --color-sand-200: #e6ded0;
+  /* --- Type --- */
+  --font-display: "Archivo Variable", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Newsreader Variable", Georgia, "Times New Roman", serif;
 
-  --font-display: "Playfair Display Variable", Georgia, "Times New Roman", serif;
-  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-
-  --shadow-lift: 0 24px 60px -24px rgb(5 20 58 / 0.35);
-  --shadow-card: 0 2px 4px rgb(5 20 58 / 0.04), 0 12px 32px -16px rgb(5 20 58 / 0.18);
+  /* Modular scale, 1.25 */
+  --text-xs: 0.82rem;
+  --text-sm: 0.94rem;
+  --text-base: 1.125rem;
+  --text-lg: 1.3rem;
+  --text-xl: 1.6rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.6rem;
+  --text-4xl: 3.4rem;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
+    scroll-padding-top: 5.5rem;
     -webkit-text-size-adjust: 100%;
   }
 
   body {
-    background-color: var(--color-sand-50);
+    background-color: var(--color-paper);
     color: var(--color-ink);
-    font-family: var(--font-sans);
-    font-size: 1.0625rem;
-    line-height: 1.7;
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.65;
+    font-variation-settings: "opsz" 16;
     -webkit-font-smoothing: antialiased;
   }
 
+  /* Headings: heavy, slightly expanded grotesque — the emblem's
+     lettering, which is set wide around the seal. */
   h1,
   h2,
   h3,
   h4 {
     font-family: var(--font-display);
-    line-height: 1.15;
-    letter-spacing: -0.015em;
+    font-variation-settings: "wdth" 112, "wght" 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
     text-wrap: balance;
+  }
+
+  h1 {
+    font-variation-settings: "wdth" 115, "wght" 800;
   }
 
   p {
     text-wrap: pretty;
   }
 
+  a {
+    color: inherit;
+  }
+
   ::selection {
-    background: var(--color-blue-800);
+    background: var(--color-green);
     color: #fff;
   }
 
   :focus-visible {
-    outline: 3px solid var(--color-scarlet-600);
+    outline: 3px solid var(--color-red);
     outline-offset: 3px;
-    border-radius: 4px;
+    border-radius: 2px;
   }
 }
 
 @layer components {
-  /* Section label above a heading */
-  .eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--color-scarlet-600);
+  /* ---- Measure ---------------------------------------------------- */
+
+  .measure {
+    max-width: 62ch;
   }
 
-  .eyebrow::before {
-    content: "";
-    width: 2rem;
-    height: 2px;
-    background: currentColor;
-    opacity: 0.6;
+  .measure-tight {
+    max-width: 48ch;
   }
 
-  .eyebrow--center::after {
-    content: "";
-    width: 2rem;
-    height: 2px;
-    background: currentColor;
-    opacity: 0.6;
+  /* ---- Links in prose --------------------------------------------- */
+
+  .link {
+    color: var(--color-green-dark);
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
   }
+
+  .link:hover {
+    color: var(--color-red-dark);
+  }
+
+  .link-light {
+    color: #fff;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+  }
+
+  .link-light:hover {
+    color: var(--color-indigo-200);
+  }
+
+  /* ---- Buttons ----------------------------------------------------
+     Square-ish, not pill-shaped: the emblem is a formal seal, and
+     the buttons should feel civic rather than consumer-app. */
 
   .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    border-radius: 999px;
-    padding: 0.85rem 1.75rem;
-    font-size: 0.95rem;
-    font-weight: 600;
+    display: inline-block;
+    font-family: var(--font-display);
+    font-variation-settings: "wdth" 108, "wght" 650;
+    font-size: var(--text-sm);
     line-height: 1;
-    border: 1.5px solid transparent;
-    transition: transform 0.18s ease, background-color 0.18s ease,
-      color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    padding: 1rem 1.6rem;
+    border: 2px solid transparent;
+    border-radius: 3px;
+    transition: background-color 0.15s ease, color 0.15s ease,
+      border-color 0.15s ease;
   }
 
-  .btn:hover {
-    transform: translateY(-2px);
-  }
-
-  .btn-primary {
-    background: var(--color-scarlet-600);
-    border-color: var(--color-scarlet-600);
-    color: #fff;
-    box-shadow: 0 10px 24px -12px rgb(200 16 46 / 0.8);
-  }
-
-  .btn-primary:hover {
-    background: var(--color-scarlet-500);
-    border-color: var(--color-scarlet-500);
-  }
-
-  .btn-light {
-    background: transparent;
-    border-color: rgb(255 255 255 / 0.45);
+  .btn-red {
+    background: var(--color-red);
+    border-color: var(--color-red);
     color: #fff;
   }
 
-  .btn-light:hover {
-    background: rgb(255 255 255 / 0.12);
-    border-color: rgb(255 255 255 / 0.8);
+  .btn-red:hover {
+    background: var(--color-red-dark);
+    border-color: var(--color-red-dark);
   }
 
-  .btn-dark {
-    background: transparent;
-    border-color: var(--color-blue-800);
-    color: var(--color-blue-800);
-  }
-
-  .btn-dark:hover {
-    background: var(--color-blue-800);
+  .btn-green {
+    background: var(--color-green);
+    border-color: var(--color-green);
     color: #fff;
   }
 
-  .card {
+  .btn-green:hover {
+    background: var(--color-green-dark);
+    border-color: var(--color-green-dark);
+  }
+
+  .btn-outline-light {
+    border-color: rgb(255 255 255 / 0.5);
+    color: #fff;
+  }
+
+  .btn-outline-light:hover {
+    border-color: #fff;
+    background: rgb(255 255 255 / 0.1);
+  }
+
+  .btn-outline {
+    border-color: var(--color-indigo);
+    color: var(--color-indigo);
+  }
+
+  .btn-outline:hover {
+    background: var(--color-indigo);
+    color: #fff;
+  }
+
+  /* ---- The three-colour rule -------------------------------------
+     The emblem's red rings, green wordmark and indigo disc, used as
+     a section marker. */
+
+  .seal-rule {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .seal-rule::before,
+  .seal-rule::after {
+    content: "";
+    height: 4px;
+    border-radius: 2px;
+  }
+
+  .seal-rule::before {
+    width: 2.5rem;
+    background: var(--color-red);
+  }
+
+  .seal-rule::after {
+    width: 0.75rem;
+    background: var(--color-green);
+  }
+
+  /* ---- Timetable --------------------------------------------------
+     A church timetable is genuinely tabular information, so it is set
+     as one, rather than chopped into identical cards. */
+
+  .timetable {
+    border-top: 2px solid var(--color-ink);
+  }
+
+  .timetable > * + * {
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  /* ---- Parish index ----------------------------------------------
+     Ministries read as a directory, not a card grid. */
+
+  .index-row {
+    border-top: 1px solid var(--color-hairline);
+    transition: background-color 0.15s ease;
+  }
+
+  .index-row:hover {
     background: #fff;
-    border: 1px solid var(--color-sand-200);
-    border-radius: 1rem;
-    box-shadow: var(--shadow-card);
-    transition: transform 0.2s ease, box-shadow 0.2s ease,
-      border-color 0.2s ease;
   }
 
-  .card-hover:hover {
-    transform: translateY(-4px);
-    border-color: var(--color-blue-100);
-    box-shadow: var(--shadow-lift);
+  /* ---- One orchestrated entrance, on the hero only --------------- */
+
+  @keyframes seal-in {
+    from {
+      opacity: 0;
+      transform: scale(0.94) rotate(-6deg);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
   }
 
-  .rule {
-    height: 3px;
-    width: 3rem;
-    border-radius: 999px;
-    background: linear-gradient(
-      90deg,
-      var(--color-scarlet-600),
-      var(--color-scarlet-600) 55%,
-      var(--color-blue-600)
-    );
+  @keyframes lift-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.75rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-seal {
+    animation: seal-in 1s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  }
+
+  .hero-line {
+    animation: lift-in 0.7s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  }
+
+  .hero-line-2 {
+    animation-delay: 0.12s;
+  }
+  .hero-line-3 {
+    animation-delay: 0.24s;
   }
 }
 
@@ -201,7 +293,7 @@
   *,
   *::before,
   *::after {
-    animation-duration: 0.001ms !important;
+    animation: none !important;
     transition-duration: 0.001ms !important;
   }
 }

@@ -64,33 +64,30 @@ Shared pieces (the header, the footer, section headings) are in
 
 ## Colours and fonts
 
-The palette comes from the RCCG emblem and its meaning:
+The palette is sampled directly from the parish emblem, and the church's own
+meaning for each colour decides where it is used:
 
-| Colour | Used for | What the RCCG says it means |
-| --- | --- | --- |
-| Blue | Backgrounds, headings | Agape — the divine love of God |
-| Red | Buttons and accents | The blood of Jesus, our covering |
-| White | The dove, clear space | Purity and the Holy Spirit |
-| Green | Supporting accents | Fruitfulness and increase |
+| Colour | Hex | On the emblem | Used on the site for |
+| --- | --- | --- | --- |
+| Indigo | `#28166F` | The disc — agape, the love of God | Backgrounds and headings |
+| Green | `#00923F` | The lettering — fruitfulness | The living work of the parish |
+| Red | `#DA251D` | The rings — the blood of Jesus | Ordinances and the main action |
+| White | `#FFFFFF` | The dove — the Holy Spirit | Clear space |
 
-Every colour is defined once, at the top of
-[`src/styles/global.css`](src/styles/global.css), under `@theme`. Change a value
-there and it changes across the whole site.
+Every value is defined once in [`src/styles/global.css`](src/styles/global.css)
+under `@theme`. Change one there and it changes across the whole site.
 
-Fonts (Playfair Display for headings, Inter for body text) are bundled with the
-site rather than loaded from Google, so pages render immediately and no visitor
-data is sent to a third party.
+Headings are set in Archivo, heavy and slightly expanded, which echoes the bold
+lettering arced around the seal. Body text is Newsreader, a serif made for
+reading on screen. Both are bundled with the site rather than loaded from
+Google, so pages render immediately and no visitor data goes to a third party.
 
-## About the logo
+## The emblem
 
-`public/logo.svg` is an **interim emblem**, drawn for this site from the
-elements and colours of the RCCG emblem — the blue world, the red rings, the
-white dove and the green earth.
-
-**Please replace it with the parish's official artwork before publishing.** Save
-the official file as `public/logo.svg` (or as a PNG, updating the filename in
-`src/components/Header.astro`, `src/components/Footer.astro` and the pages that
-show it). `public/favicon.svg` is the small version shown in the browser tab.
+`public/rccg-emblem.png` is the official RCCG emblem, supplied by the parish.
+`rccg-emblem-sm.png` and `favicon.png` are smaller copies of the same artwork
+for the header, the footer and the browser tab. If you ever replace it,
+regenerate all three so they stay consistent.
 
 ## Putting it online
 

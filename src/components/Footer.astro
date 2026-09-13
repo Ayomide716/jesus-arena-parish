@@ -13,30 +13,46 @@ const icons: Record<string, string> = {
 };
 ---
 
-<footer class="bg-blue-950 text-blue-100/70">
-  <div class="mx-auto max-w-6xl px-5 py-16">
-    <div class="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
+<footer class="bg-indigo-900 text-indigo-200">
+  <div class="h-[2px] bg-green"></div>
+  <div class="h-[3px] bg-red"></div>
+
+  <div class="mx-auto max-w-6xl px-5 py-14">
+    <div class="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
       <div>
-        <div class="flex items-center gap-3 text-white">
-          <img src={url("logo.svg")} alt="" width="56" height="56" class="h-14 w-14" />
-          <span class="leading-tight">
-            <span class="block font-display text-lg font-semibold">{church.name}</span>
-            <span class="block text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-blue-100/70">
-              RCCG
+        <div class="flex items-center gap-3">
+          <img
+            src={url("rccg-emblem-sm.png")}
+            alt=""
+            width="160"
+            height="160"
+            class="h-14 w-14"
+          />
+          <span class="font-display leading-none text-white">
+            <span class="block text-lg" style="font-variation-settings: 'wdth' 112, 'wght' 700;">
+              {church.name}
+            </span>
+            <span
+              class="mt-1 block text-[0.68rem] text-indigo-200"
+              style="font-variation-settings: 'wdth' 105, 'wght' 500; letter-spacing: 0.08em;"
+            >
+              Redeemed Christian Church of God
             </span>
           </span>
         </div>
-        <p class="mt-5 max-w-sm text-sm leading-relaxed">
-          {church.denomination} — {church.tagline.toLowerCase()}. Wherever you
-          are on your journey of faith, there is a seat here for you.
+
+        <p class="measure-tight mt-5 text-sm">
+          A parish of the Redeemed Christian Church of God. Whatever brought you
+          here, you are welcome on Sunday.
         </p>
-        <div class="mt-6 flex gap-3">
+
+        <div class="mt-6 flex gap-2.5">
           {
             socials.map((s) => (
               <a
                 href={s.href}
                 aria-label={s.name}
-                class="grid h-10 w-10 place-items-center rounded-full border border-white/20 text-white/80 transition hover:border-scarlet-600 hover:bg-scarlet-600/15 hover:text-white"
+                class="grid h-10 w-10 place-items-center rounded-sm border-2 border-white/20 text-white/80 hover:border-green hover:text-white"
               >
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d={icons[s.icon]} />
@@ -47,37 +63,37 @@ const icons: Record<string, string> = {
         </div>
       </div>
 
-      <div>
-        <h2 class="font-sans text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-white">
-          Explore
+      <nav aria-label="Footer">
+        <h2 class="font-display text-sm text-white" style="font-variation-settings: 'wdth' 108, 'wght' 650;">
+          The parish
         </h2>
-        <ul class="mt-5 space-y-2.5 text-sm">
+        <ul class="mt-4 space-y-2.5 text-sm">
           {
             nav.map((item) => (
               <li>
-                <a href={item.href} class="transition hover:text-white">
+                <a href={item.href} class="hover:text-white">
                   {item.label}
                 </a>
               </li>
             ))
           }
           <li>
-            <a href={url("giving")} class="transition hover:text-white">Giving</a>
+            <a href={url("giving")} class="hover:text-white">Giving</a>
           </li>
         </ul>
-      </div>
+      </nav>
 
       <div>
-        <h2 class="font-sans text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-white">
-          Service times
+        <h2 class="font-display text-sm text-white" style="font-variation-settings: 'wdth' 108, 'wght' 650;">
+          When we meet
         </h2>
-        <ul class="mt-5 space-y-2.5 text-sm">
+        <ul class="mt-4 space-y-2.5 text-sm">
           {
             services.map((s) => (
               <li>
-                <span class="text-white/90">{s.name}</span>
+                <span class="text-white">{s.name}</span>
                 <br />
-                {s.day} · {s.time}
+                {s.day}, {s.time}
               </li>
             ))
           }
@@ -85,11 +101,8 @@ const icons: Record<string, string> = {
       </div>
     </div>
 
-    <div
-      class="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs sm:flex-row sm:items-center sm:justify-between"
-    >
-      <p>&copy; {year} {church.fullName}. All rights reserved.</p>
-      <p>To God be the glory.</p>
-    </div>
+    <p class="mt-12 border-t border-white/10 pt-6 text-xs">
+      &copy; {year} {church.fullName}. To God be the glory.
+    </p>
   </div>
 </footer>

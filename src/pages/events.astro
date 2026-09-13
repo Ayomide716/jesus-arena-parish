@@ -1,7 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
 import PageHero from "../components/PageHero.astro";
-import SectionHead from "../components/SectionHead.astro";
 import { church, events, services, url } from "../data/site";
 ---
 
@@ -10,81 +9,93 @@ import { church, events, services, url } from "../data/site";
   description="Service times, monthly programmes and special gatherings at RCCG Jesus Arena Parish."
 >
   <PageHero
-    eyebrow="What's coming up"
     title="Events and gatherings"
     lede="Our week, our month and our year at a glance. All are welcome at every gathering — bring a friend."
     verse="“Not forsaking the assembling of ourselves together.” — Hebrews 10:25"
   />
 
-  <!-- Weekly rhythm -->
-  <section class="px-5 py-20 sm:py-24">
+  <section class="px-5 py-16 sm:py-20">
     <div class="mx-auto max-w-6xl">
-      <SectionHead
-        eyebrow="Every week"
-        title="Our weekly rhythm"
-        lede="These are the gatherings you can count on, week in and week out."
-      />
+      <div class="grid gap-12 lg:grid-cols-[20rem_1fr]">
+        <div>
+          <h2 class="text-2xl sm:text-3xl">Every week</h2>
+          <p class="measure mt-4 text-ink-soft">
+            These are the gatherings you can count on, week in and week out.
+          </p>
+        </div>
 
-      <div class="mt-12 divide-y divide-sand-200 overflow-hidden rounded-2xl border border-sand-200 bg-white">
-        {
-          services.map((s) => (
-            <div class="flex flex-col gap-2 p-7 sm:flex-row sm:items-center sm:gap-8">
-              <p class="w-28 shrink-0 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-scarlet-600">
-                {s.day}
-              </p>
-              <div class="flex-1">
-                <h3 class="font-display text-xl font-semibold text-blue-900">
-                  {s.name}
-                </h3>
-                <p class="mt-1 text-sm leading-relaxed text-muted">{s.note}</p>
+        <div class="timetable">
+          {
+            services.map((s) => (
+              <div class="grid gap-1 py-5 sm:grid-cols-[7rem_1fr_auto] sm:gap-6 sm:py-6">
+                <p
+                  class="font-display text-sm text-green-dark"
+                  style="font-variation-settings: 'wdth' 106, 'wght' 650;"
+                >
+                  {s.day}
+                </p>
+                <div>
+                  <h3 class="text-lg">{s.name}</h3>
+                  <p class="measure mt-1 text-sm text-ink-soft">{s.note}</p>
+                </div>
+                <p
+                  class="font-display text-sm whitespace-nowrap sm:text-right"
+                  style="font-variation-settings: 'wdth' 106, 'wght' 600;"
+                >
+                  {s.time}
+                </p>
               </div>
-              <p class="shrink-0 font-medium text-ink">{s.time}</p>
-            </div>
-          ))
-        }
+            ))
+          }
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Calendar -->
-  <section class="bg-white px-5 py-20 sm:py-24">
+  <section class="bg-white px-5 py-16 sm:py-20">
     <div class="mx-auto max-w-6xl">
-      <SectionHead
-        eyebrow="On the calendar"
-        title="Programmes and special services"
-        lede="Monthly and annual gatherings that mark the life of the parish."
-      />
+      <h2 class="text-2xl sm:text-3xl">Through the month and the year</h2>
+      <p class="measure mt-4 text-ink-soft">
+        The programmes and special services that mark the life of the parish.
+      </p>
 
-      <div class="mt-12 grid gap-7 md:grid-cols-2">
+      <div class="mt-12 grid gap-x-12 gap-y-9 sm:grid-cols-2">
         {
           events.map((e) => (
-            <article class="card card-hover flex gap-6 p-7">
-              <div class="grid h-20 w-20 shrink-0 place-content-center rounded-xl bg-blue-900 text-center text-white">
-                <span class="text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-blue-100/80">
+            <article class="flex gap-5">
+              <div
+                class="grid h-16 w-16 shrink-0 place-content-center bg-indigo text-center text-white"
+                style="border-radius: 3px;"
+              >
+                <span
+                  class="font-display text-[0.62rem] text-indigo-200"
+                  style="font-variation-settings: 'wdth' 104, 'wght' 550;"
+                >
                   {e.badge.top}
                 </span>
-                <span class="font-display text-2xl leading-tight">
+                <span
+                  class="font-display text-xl leading-none"
+                  style="font-variation-settings: 'wdth' 110, 'wght' 700;"
+                >
                   {e.badge.main}
                 </span>
               </div>
               <div>
-                <h3 class="text-xl font-semibold text-blue-900">{e.title}</h3>
-                <p class="mt-1 text-sm text-muted">
-                  {e.when} · {e.where}
+                <h3 class="text-lg">{e.title}</h3>
+                <p class="mt-0.5 text-sm text-green-dark">
+                  {e.when}, in the {e.where.toLowerCase()}
                 </p>
-                <p class="mt-3 leading-relaxed text-muted">{e.body}</p>
+                <p class="measure mt-2 text-ink-soft">{e.body}</p>
               </div>
             </article>
           ))
         }
       </div>
 
-      <p class="mt-10 text-sm text-muted">
-        Dates occasionally change. If you are travelling to join us for a
-        special service,
-        <a href={url("contact")} class="font-semibold text-blue-800 underline">
-          check with the parish office
-        </a> first.
+      <p class="measure mt-12 text-sm text-ink-soft">
+        Dates occasionally change. If you are travelling to join us for a special
+        service, <a href={url("contact")} class="link">check with the parish
+        office</a> first.
       </p>
     </div>
   </section>
