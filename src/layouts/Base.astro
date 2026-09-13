@@ -10,11 +10,13 @@ import { church, url } from "../data/site";
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
 }
 
 const {
   title = `${church.fullName} — ${church.tagline}`,
   description = church.description,
+  noindex = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
@@ -36,6 +38,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(url("rccg-emblem.png"), canonical)} />
     <meta name="twitter:card" content="summary" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <meta name="generator" content={Astro.generator} />
   </head>
 
