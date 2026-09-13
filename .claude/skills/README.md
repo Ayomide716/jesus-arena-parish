@@ -22,6 +22,40 @@ the website and are not included in the Astro build or the Vercel deployment.
 `gsap-react` and `gsap-frameworks` were deliberately left out: this site is
 Astro, with no React, Vue or Svelte.
 
+### Three.js (installed, not in use)
+
+Fifteen skills from
+[Three.js-Claude-Skill-Package](https://github.com/OpenAEC-Foundation/Three.js-Claude-Skill-Package)
+(MIT, documentation only — no scripts), covering the core renderer and scene
+graph, geometries, materials, loaders, controls, shaders, lighting, shadows,
+animation, the common rendering and performance mistakes, and model
+optimisation.
+
+**Nothing on the site uses these yet, and that is deliberate.** They are
+installed so the knowledge is here if a 3D element is ever wanted.
+
+Nine of the twenty-four were left out as wrong for this project: React Three
+Fiber and Drei (no React here), physics, XR, WebGPU, audio, post-processing,
+the IFC viewer (building-information models, for architecture tools) and the
+scene-builder agent.
+
+### Before shipping any WebGL here, read this
+
+The home page currently downloads **6KB of HTML and 7KB of CSS, gzipped, and
+no JavaScript at all**. A minimal tree-shaken Three.js scene is roughly 150KB
+gzipped — more than ten times the whole page's code — plus continuous GPU work,
+which on a mid-range phone means heat and battery drain.
+
+Much of what looks like 3D does not need WebGL. Real perspective, depth and
+rotation are available in CSS (`transform-style: preserve-3d`, `perspective`),
+run on the compositor, and cost nothing to download; the motion cookbook in
+`design-motion-principles` covers the technique in its "3D CSS" section. Try
+that first.
+
+And note what the emblem is: an institutional religious mark whose colours
+carry stated doctrinal meaning. Giving it physical depth reads as care.
+Spinning it, exploding it into particles or morphing it does not.
+
 ## A note on animation and this site
 
 The built site currently ships **no JavaScript files at all**, which is the
