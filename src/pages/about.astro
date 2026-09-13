@@ -44,7 +44,7 @@ import { beliefs, church, pastor, url } from "../data/site";
         <p class="text-lg italic leading-relaxed">“{pastor.quote}”</p>
         <p
           class="mt-6 font-display text-base"
-          style="font-variation-settings: 'wdth' 108, 'wght' 650;"
+          style="font-weight: 650;"
         >
           {pastor.name}
         </p>
@@ -81,10 +81,12 @@ import { beliefs, church, pastor, url } from "../data/site";
   <section class="bg-indigo-900 px-5 py-16 text-white sm:py-20">
     <div class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[18rem_1fr] lg:gap-16">
       <img
-        src={url("rccg-emblem.png")}
+        src={url("rccg-emblem-480.png")}
         alt="The emblem of the Redeemed Christian Church of God"
-        width="900"
-        height="900"
+        width="480"
+        height="480"
+        loading="lazy"
+        decoding="async"
         class="mx-auto w-52 lg:mx-0 lg:w-full"
       />
       <div>
@@ -104,7 +106,7 @@ import { beliefs, church, pastor, url } from "../data/site";
               <div class:list={["border-l-4 pl-4", border]}>
                 <dt
                   class="font-display text-base"
-                  style="font-variation-settings: 'wdth' 108, 'wght' 650;"
+                  style="font-weight: 650;"
                 >
                   {term}
                 </dt>

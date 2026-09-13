@@ -33,7 +33,7 @@
 
   /* --- Type --- */
   --font-display: "Archivo Variable", "Helvetica Neue", Arial, sans-serif;
-  --font-body: "Newsreader Variable", Georgia, "Times New Roman", serif;
+  --font-body: "Newsreader", Georgia, "Times New Roman", serif;
 
   /* Modular scale, 1.25 */
   --text-xs: 0.82rem;
@@ -59,7 +59,6 @@
     font-family: var(--font-body);
     font-size: var(--text-base);
     line-height: 1.65;
-    font-variation-settings: "opsz" 16;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -70,14 +69,14 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    font-variation-settings: "wdth" 112, "wght" 700;
+    font-weight: 700;
     line-height: 1.04;
     letter-spacing: -0.02em;
     text-wrap: balance;
   }
 
   h1 {
-    font-variation-settings: "wdth" 115, "wght" 800;
+    font-weight: 800;
   }
 
   p {
@@ -143,7 +142,7 @@
   .btn {
     display: inline-block;
     font-family: var(--font-display);
-    font-variation-settings: "wdth" 108, "wght" 650;
+    font-weight: 650;
     font-size: var(--text-sm);
     line-height: 1;
     padding: 1rem 1.6rem;
